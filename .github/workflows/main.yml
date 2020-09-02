@@ -1,4 +1,4 @@
-name: Try to get interactions
+name: Final Test
 
 on: push
 
@@ -24,11 +24,17 @@ jobs:
       - name: Upload to cowtransfer
         run: |
           curl -sL https://jerrita.cn/install.sh | sh
-          ./transfer cow --block 2621440 pack.zip | tee cowtransfer.log
+          ./transfer cow -s -p 64 pack.zip | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
-      # - name: Upload files
-      #   uses: actions/upload-artifact@master
-      #   with:
-      #     name: Interactions
-      #     path: pack
+      - name: Upload to wetransfer
+        run: |
+          curl -sL https://jerrita.cn/install.sh | sh
+          ./transfer wet -s -p 16 pack.zip | tee wetransfer.log
+          echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+
+      - name: Upload files
+        uses: actions/upload-artifact@master
+        with:
+          name: Interactions
+          path: pack
