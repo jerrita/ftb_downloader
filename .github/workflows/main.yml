@@ -20,5 +20,5 @@ jobs:
     needs: prepare
     steps:
       - name: Packing
-          run: |
-            cat file.txt
+        run: |
+          cat file.txt
