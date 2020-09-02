@@ -1,21 +1,21 @@
-name: Interactions Test
+name: Get Interactions
 
 on: push
 
 jobs:
   pack:
     name: Pull and pack
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Pulling files
         run: |
           mkdir pack
-          cd pack && wget https://api.modpacks.ch/public/modpack/5/121/server/mac
-          chmod +x mac
+          cd pack && wget https://api.modpacks.ch/public/modpack/5/121/server/linux
+          chmod +x linux
 
       - name: Getting server
         run: |
-          cd pack && ./mac 5
+          cd pack && ./linux 5
 
       - name: Packing files
         run: |
@@ -25,4 +25,10 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: Interactions
-          path: pack.tar.gz
+          path: pack
+
+      - name: Upload to cowtransfer
+        run: |
+          curl -fsSL git.io/file-transfer | sh
+          ./transfer cow --block 2621440 -s -p 64 --no-progress pack.tar.gz 2>&1 | tee cowtransfer.log
+          echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
