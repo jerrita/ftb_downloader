@@ -24,11 +24,11 @@ jobs:
       - name: Upload to cowtransfer
         run: |
           curl -fsSL git.io/file-transfer | sh
-          ./transfer cow --block 2621440 -s -p 64 --no-progress pack.tar.gz | tee cowtransfer.log
+          ./transfer cow pack.tar.gz | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
-      - name: Upload files
-        uses: actions/upload-artifact@master
-        with:
-          name: Interactions
-          path: pack
+      # - name: Upload files
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: Interactions
+      #     path: pack
