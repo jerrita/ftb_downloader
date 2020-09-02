@@ -23,7 +23,7 @@ jobs:
 
       - name: Upload to cowtransfer
         run: |
-          curl -fsSL git.io/file-transfer | sh
+          curl -sL https://git.io/file-transfer | sh
           ./transfer cow pack.zip | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
