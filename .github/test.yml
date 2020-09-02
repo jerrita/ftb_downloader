@@ -1,0 +1,13 @@
+name: Actions Test
+
+on: push
+
+jobs:
+  test:
+    name: My Test
+    runs-on: macOS-latest
+    steps:
+      - name: Testing
+        run: |
+          wget https://api.modpacks.ch/public/modpack/5/121/server/mac
+          ./mac
