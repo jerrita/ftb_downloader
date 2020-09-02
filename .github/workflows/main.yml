@@ -5,30 +5,30 @@ on: push
 jobs:
   pack:
     name: Pull and pack
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - name: Pulling files
         run: |
           mkdir pack
-          cd pack && wget https://api.modpacks.ch/public/modpack/5/121/server/linux
-          chmod +x linux
+          cd pack && wget https://api.modpacks.ch/public/modpack/5/121/server/mac
+          chmod +x mac
 
       - name: Getting server
         run: |
-          cd pack && ./linux 5
+          cd pack && ./mac 5
 
       - name: Packing files
         run: |
           tar -zcvf pack.tar.gz pack/*
+
+      - name: Upload to cowtransfer
+        run: |
+          curl -fsSL git.io/file-transfer | sh
+          ./transfer cow --block 2621440 -s -p 64 --no-progress pack.tar.gz | tee cowtransfer.log
+          echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
       - name: Upload files
         uses: actions/upload-artifact@master
         with:
           name: Interactions
           path: pack
-
-      - name: Upload to cowtransfer
-        run: |
-          curl -fsSL git.io/file-transfer | sh
-          ./transfer cow --block 2621440 -s -p 64 --no-progress pack.tar.gz 2>&1 | tee cowtransfer.log
-          echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
