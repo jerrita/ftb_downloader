@@ -12,9 +12,8 @@ jobs:
           # wget https://api.modpacks.ch/public/modpack/5/121/server/mac
           # chmod +x mac
           # ./mac 5
-          touch file.zip
-          ls
-          pwd
+          touch file.txt
+          echo test > file.txt
   pack:
     name: pack
     runs-on: macOS-latest
@@ -22,5 +21,4 @@ jobs:
     steps:
       - name: Packing
           run: |
-            ls
-            pwd
+            cat file.txt
