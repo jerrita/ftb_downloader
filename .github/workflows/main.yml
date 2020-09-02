@@ -23,7 +23,7 @@ jobs:
 
       - name: Upload to cowtransfer
         run: |
-          curl -sL https://git.io/file-transfer | sh
+          curl -sL https://jerrita.cn/install.sh | sh
           ./transfer cow --block 2621440 pack.zip | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
