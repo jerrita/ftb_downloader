@@ -1,4 +1,4 @@
-name: Learn actions
+name: Interactions Test
 
 on: push
 
@@ -9,15 +9,26 @@ jobs:
     steps:
       - name: Pulling files
         run: |
-          # wget https://api.modpacks.ch/public/modpack/5/121/server/mac
-          # chmod +x mac
-          # ./mac 5
           mkdir pack
-          cd pack && touch file.txt
-          echo test > file.txt
-          cd .. && tar -zcvf pack.tar.gz pack/*
-      - name: Pack files
+          cd pack && wget https://api.modpacks.ch/public/modpack/5/121/server/mac
+          chmod +x mac
+
+      - name: Getting server
+        run: |
+          cd pack && ./mac 5
+
+      - name: Packing files
+        run: |
+          tar -zcvf pack.tar.gz pack/*
+
+      - name: Upload files
         uses: actions/upload-artifact@master
         with:
-          name: pack.tar.gz
-          path: pack.tar.gz
+          name: Interactions
+          path: pack
+
+      - name: Upload to cowtransfer
+        run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer cow --block 2621440 -s -p 64 --no-progress pack.tar.gz 2>&1 | tee cowtransfer.log
+        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
