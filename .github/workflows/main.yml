@@ -3,8 +3,8 @@ name: Learn actions
 on: push
 
 jobs:
-  prepare:
-    name: prepare
+  pack:
+    name: Pull and pack
     runs-on: macOS-latest
     steps:
       - name: Pulling files
@@ -14,11 +14,6 @@ jobs:
           # ./mac 5
           touch file.txt
           echo test > file.txt
-  pack:
-    name: pack
-    runs-on: macOS-latest
-    needs: prepare
-    steps:
-      - name: Packing
+      - name: Pack files
         run: |
           cat file.txt
