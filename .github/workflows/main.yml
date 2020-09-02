@@ -15,6 +15,9 @@ jobs:
           mkdir pack
           cd pack && touch file.txt
           echo test > file.txt
+          cd .. && tar -zcvf pack.tar.gz pack/*
       - name: Pack files
-        run: |
-          cd pack && cat file.txt
+        uses: actions/upload-artifact@master
+        with:
+          name: pack.tar.gz
+          path: pack.tar.gz
