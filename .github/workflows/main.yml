@@ -19,7 +19,7 @@ jobs:
 
       - name: Packing files
         run: |
-          zip pack.zip pack/*
+          zip -r pack.zip pack/*
 
       - name: Upload to cowtransfer
         run: |
