@@ -12,8 +12,9 @@ jobs:
           # wget https://api.modpacks.ch/public/modpack/5/121/server/mac
           # chmod +x mac
           # ./mac 5
-          touch file.txt
+          mkdir -p /workdir
+          cd /workdir && touch file.txt
           echo test > file.txt
       - name: Pack files
         run: |
-          cat file.txt
+          cd /workdir && cat file.txt
