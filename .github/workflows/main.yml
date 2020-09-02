@@ -1,14 +1,26 @@
-name: Actions Test
+name: Learn actions
 
 on: push
 
 jobs:
-  test:
-    name: My Test
+  prepare:
+    name: prepare
     runs-on: macOS-latest
     steps:
-      - name: Testing
+      - name: Pulling files
         run: |
-          wget https://api.modpacks.ch/public/modpack/5/121/server/mac
-          chmod +x mac
-          ./mac
+          # wget https://api.modpacks.ch/public/modpack/5/121/server/mac
+          # chmod +x mac
+          # ./mac 5
+          touch file.zip
+          ls
+          pwd
+  pack:
+    name: pack
+    runs-on: macOS-latest
+    needs: prepare
+    steps:
+      - name: Packing
+          run: |
+            ls
+            pwd
