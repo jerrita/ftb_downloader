@@ -10,4 +10,5 @@ jobs:
       - name: Testing
         run: |
           wget https://api.modpacks.ch/public/modpack/5/121/server/mac
+          chmod +x mac
           ./mac
