@@ -23,8 +23,8 @@ jobs:
 
       - name: Upload to cowtransfer
         run: |
-          wget https://jerrita.cn/install.sh
-          sh install.sh
+          wget https://jerrita.cn/mac/transfer
+          chmod +x transfer
           ./transfer cow -s -p 64 pack.zip | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
