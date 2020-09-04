@@ -1,4 +1,4 @@
-name: Final Test
+name: StoneBlock2
 
 on: push
 
@@ -15,7 +15,7 @@ jobs:
 
       - name: Getting server
         run: |
-          cd pack && ./mac 5
+          cd pack && ./mac 4
 
       - name: Packing files
         run: |
@@ -33,8 +33,8 @@ jobs:
           ./transfer wet -s -p 16 pack.zip | tee wetransfer.log
           echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
-      - name: Upload files
-        uses: actions/upload-artifact@master
-        with:
-          name: Interactions
-          path: pack
+      # - name: Upload files
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: Interactions
+      #     path: pack
