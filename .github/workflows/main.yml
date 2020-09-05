@@ -1,4 +1,4 @@
-name: StoneBlock2
+name: FTB Academy
 
 on: push
 
@@ -15,7 +15,7 @@ jobs:
 
       - name: Getting server
         run: |
-          cd pack && ./mac 4
+          cd pack && ./mac 1
 
       - name: Packing files
         run: |
